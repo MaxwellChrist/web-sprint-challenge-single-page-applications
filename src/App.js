@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import OrderForm from "./components/OrderForm";
 import { Switch, Link, Route } from "react-router-dom";
 import './App.css';
 
-
+const initialOrder = [];
 
 const App = () => {
+
+  const [orders, setOrders] = useState(initialOrder);
+
+  const submitOrder = (newOrder) => {
+    // console.log(newOrder);
+    setOrders([...orders, newOrder]) 
+  }
+
+  useEffect(() => {
+    console.log(orders);
+  })
 
   return (
     <>
@@ -19,7 +30,7 @@ const App = () => {
           <h3>Let's customize a pizza!</h3>
         </Route>
         <Route path="/pizza">
-          <OrderForm/>
+          <OrderForm submitOrder={submitOrder}/>
         </Route>
       </Switch>
     </>

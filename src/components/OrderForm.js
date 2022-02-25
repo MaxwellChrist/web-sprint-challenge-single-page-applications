@@ -27,6 +27,7 @@ const OrderForm = (props) => {
     const [form, setForm] = useState(initialForm)
     const [error, setError] = useState(initialError)   
     const [disabled, setDisabled] = useState(true)
+    const { submitOrder } = props
 
     const formValidate = (event) => {
         yup.reach(formSchema, event.target.name)
@@ -50,6 +51,9 @@ const OrderForm = (props) => {
     const submitForm = (event) => {
         event.preventDefault();
         // console.log(form);
+        submitOrder(form);
+        console.log(form);
+        setForm(initialForm);
     }
 
     useEffect(() => {
