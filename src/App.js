@@ -10,8 +10,8 @@ const App = () => {
   return (
     <>
       <header>
-        <Link to="/" id="order-pizza">Home</Link>
-        <Link to="/pizza">Click here to start your order</Link>
+        <Link to="/">Home</Link>
+        <Link to="/pizza" id="order-pizza">Click here to start your order</Link>
       </header>
       <Switch>
         <Route exact path="/">
