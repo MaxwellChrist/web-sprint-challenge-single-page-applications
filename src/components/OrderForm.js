@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const initialForm = {
     name: "",
@@ -16,20 +16,25 @@ const OrderForm = () => {
 
     const formChange = (event) => {
         // console.log(event.target);
-        console.log(event.target.name, event.target.value, event.target.checked);
+        // console.log(event.target.name, event.target.value, event.target.checked);
         const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
         setForm({...form, [event.target.name]: value})
     }
 
     const submitForm = (event) => {
-
+        event.preventDefault();
+        console.log(form);
     }
+
+    useEffect(() => {
+        console.log(form);
+    }, [form])
 
     return (
         <>
             <section>
                 <h1>What would you like on your pizza?</h1>
-                <form id="pizza-form"></form>
+                <form id="pizza-form" onSubmit={submitForm}>
                     <label>Please enter your name:
                         <input
                             id="name-input"
@@ -99,7 +104,8 @@ const OrderForm = () => {
                             onChange={formChange}
                         />
                     </label>
-                    <button id="order-button">Order</button>
+                    <button id="order-button" type="submit">Order</button>
+                </form>
             </section>
         </>
     )
