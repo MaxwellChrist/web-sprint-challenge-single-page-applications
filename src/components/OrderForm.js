@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import * as yup from 'yup';
+import formSchema from '../validation/formSchema';
 
 const initialForm = {
     name: "",
@@ -10,13 +12,36 @@ const initialForm = {
     special: ""
 }
 
+const initialError = {
+    name: "",
+    size: "",
+    pepperoni: "",
+    peppers: "",
+    onions: "",
+    mushrooms: "",
+    special: "" 
+}
+
 const OrderForm = () => {
 
     const [form, setForm] = useState(initialForm)
+    const[error, setError] = useState(initialError)
+
+    const formValidate = (event) => {
+        yup.reach(formSchema, event.target.name)
+        .validate(event.target.type === "checkbox" ? event.target.checked : event.target.value)
+            .then(() => {
+                setError({...error, [event.target.name]: ""})
+            })
+            .catch(() => {
+                setError({...error, [event.target.name]: error.errors[0]})
+            })
+    }
 
     const formChange = (event) => {
         // console.log(event.target);
         // console.log(event.target.name, event.target.value, event.target.checked);
+        formValidate(event);
         const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
         setForm({...form, [event.target.name]: value})
     }
@@ -35,6 +60,15 @@ const OrderForm = () => {
             <section>
                 <h1>What would you like on your pizza?</h1>
                 <form id="pizza-form" onSubmit={submitForm}>
+                    <div id="errors">
+                        <h3>{error.name}</h3>
+                        <h3>{error.size}</h3>
+                        <h3>{error.pepperoni}</h3>
+                        <h3>{error.peppers}</h3>
+                        <h3>{error.onions}</h3>
+                        <h3>{error.mushrooms}</h3>
+                        <h3>{error.special}</h3>
+                    </div>
                     <label>Please enter your name:
                         <input
                             id="name-input"
