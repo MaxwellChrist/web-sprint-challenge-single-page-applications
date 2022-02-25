@@ -12,7 +12,18 @@ const initialForm = {
 
 const OrderForm = () => {
 
-    const [form, setForm] = useState({initialForm})
+    const [form, setForm] = useState(initialForm)
+
+    const formChange = (event) => {
+        // console.log(event.target);
+        console.log(event.target.name, event.target.value, event.target.checked);
+        const value = event.target.type === "checkbox" ? event.target.checked : event.target.value;
+        setForm({...form, [event.target.name]: value})
+    }
+
+    const submitForm = (event) => {
+
+    }
 
     return (
         <>
@@ -25,7 +36,7 @@ const OrderForm = () => {
                             type="text"
                             name="name"
                             value={form.name}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <label>Please select a size:
@@ -33,7 +44,7 @@ const OrderForm = () => {
                             id="size-dropdown"
                             name="size"
                             value={form.size}
-                            // onChange={formChange}
+                            onChange={formChange}
                         >
                             <option value=''>Select an option</option>
                             <option value='small'>Small</option>
@@ -49,7 +60,7 @@ const OrderForm = () => {
                             type="checkbox"
                             name="pepperoni"
                              checked={form.pepperoni}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <label>Peppers
@@ -58,7 +69,7 @@ const OrderForm = () => {
                             type="checkbox"
                             name="peppers"
                              checked={form.peppers}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <label>Onions
@@ -67,7 +78,7 @@ const OrderForm = () => {
                             type="checkbox"
                             name="onions"
                              checked={form.onions}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <label>Mushrooms
@@ -76,7 +87,7 @@ const OrderForm = () => {
                             type="checkbox"
                             name="mushrooms"
                              checked={form.mushrooms}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <label>Enter any special instructions:
@@ -85,7 +96,7 @@ const OrderForm = () => {
                             type="text"
                             name="special"
                             value={form.special}
-                            // onChange={formChange}
+                            onChange={formChange}
                         />
                     </label>
                     <button id="order-button">Order</button>
