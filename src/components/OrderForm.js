@@ -22,10 +22,11 @@ const initialError = {
     special: "" 
 }
 
-const OrderForm = () => {
+const OrderForm = (props) => {
 
     const [form, setForm] = useState(initialForm)
-    const[error, setError] = useState(initialError)
+    const [error, setError] = useState(initialError)   
+    const [disabled, setDisabled] = useState(true)
 
     const formValidate = (event) => {
         yup.reach(formSchema, event.target.name)
@@ -33,7 +34,7 @@ const OrderForm = () => {
             .then(() => {
                 setError({...error, [event.target.name]: ""})
             })
-            .catch(() => {
+            .catch((error) => {
                 setError({...error, [event.target.name]: error.errors[0]})
             })
     }
@@ -48,11 +49,12 @@ const OrderForm = () => {
 
     const submitForm = (event) => {
         event.preventDefault();
-        console.log(form);
+        // console.log(form);
     }
 
     useEffect(() => {
-        console.log(form);
+        formSchema.isValid(form).then((valid) => setDisabled(!valid));
+        // console.log(form);
     }, [form])
 
     return (
@@ -138,7 +140,7 @@ const OrderForm = () => {
                             onChange={formChange}
                         />
                     </label>
-                    <button id="order-button" type="submit">Order</button>
+                    <button id="order-button" type="submit" disabled={disabled}>Order</button>
                 </form>
             </section>
         </>
