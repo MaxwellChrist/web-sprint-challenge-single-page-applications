@@ -52,7 +52,7 @@ const OrderForm = (props) => {
         event.preventDefault();
         // console.log(form);
         submitOrder(form);
-        console.log(form);
+        // console.log(form);
         setForm(initialForm);
     }
 
@@ -101,7 +101,6 @@ const OrderForm = (props) => {
                     <h3>Pizza toppings</h3>
                     <label>Pepperoni
                         <input
-                            id="name-input"
                             type="checkbox"
                             name="pepperoni"
                              checked={form.pepperoni}
@@ -110,7 +109,6 @@ const OrderForm = (props) => {
                     </label>
                     <label>Peppers
                         <input
-                            id="name-input"
                             type="checkbox"
                             name="peppers"
                              checked={form.peppers}
@@ -119,7 +117,6 @@ const OrderForm = (props) => {
                     </label>
                     <label>Onions
                         <input
-                            id="name-input"
                             type="checkbox"
                             name="onions"
                              checked={form.onions}
@@ -128,7 +125,6 @@ const OrderForm = (props) => {
                     </label>
                     <label>Mushrooms
                         <input
-                            id="name-input"
                             type="checkbox"
                             name="mushrooms"
                              checked={form.mushrooms}
